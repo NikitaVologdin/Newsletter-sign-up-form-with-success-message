@@ -25,12 +25,18 @@
     <main>
       <section class="subscribe">
         <header class="subscribe__header">
-          <img
-            src="/assets/images/illustration-sign-up-mobile.svg"
-            width="375"
-            height="284"
-            alt=""
-          />
+          <picture>
+            <source
+              srcset="/assets/images/illustration-sign-up-desktop.svg"
+              media="(min-width:48em)"
+            />
+            <img
+              src="/assets/images/illustration-sign-up-mobile.svg"
+              width="375"
+              height="284"
+              alt=""
+            />
+          </picture>
         </header>
         <article class="subscribe__article article">
           <h1 class="article__heading">Stay updated!</h1>
@@ -47,9 +53,19 @@
             <li class="list__item">And much more!</li>
           </ul>
         </article>
-        <form class="subscribe__form form">
+        <form
+          class="subscribe__form form"
+          id="form"
+          autocomplete="on"
+          novalidate
+        >
           <div class="form__control form-control">
-            <label for="email" class="form-control__label">Email address</label>
+            <div class="form-control__info">
+              <label for="email" class="form-control__label"
+                >Email address</label
+              >
+              <span class="form-control__message" id="error"></span>
+            </div>
             <input
               type="email"
               name="email"
@@ -76,8 +92,11 @@
       <img src="/assets/images/icon-success.svg" alt="" class="modal__image" />
       <h2 class="modal__heading">Thanks for subscribing!</h2>
       <p class="modal__message">
-        A confirmation email has been sent to ash@loremcompany.com. Please open
-        it and click the button inside to confirm your subscription
+        A confirmation email has been sent to
+        <span class="modal__message_bold" id="user-email"
+          >ash@loremcompany.com</span
+        >. Please open it and click the button inside to confirm your
+        subscription
       </p>
       <button class="modal__button_close button" id="dismiss">
         Dismiss message

@@ -2,18 +2,72 @@ const body = document.getElementById("body");
 const dialog = document.getElementById("dialog");
 const submitButton = document.getElementById("submit");
 const dismissButton = document.getElementById("dismiss");
+const form = document.getElementById("form");
+const error = document.getElementById("error");
+const emailInput = document.getElementById("email");
+const userEmail = document.getElementById("user-email");
+
+function showSuccess(data) {
+  dialog.showModal();
+  userEmail.innerText = data;
+  dialog.classList.toggle("show");
+  body.classList.toggle("modal-open");
+}
+
+function closeDialog() {
+  body.classList.toggle("modal-open");
+  dialog.classList.toggle("show");
+
+  const timeOutId = setTimeout(() => {
+    dialog.close();
+  }, 300);
+}
+
+function validateEmail(email) {
+  const regExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const validated = regExp.test(email);
+  return { validated, error: "Valid email required" };
+}
+
+function showError(message) {
+  error.innerText = message;
+  error.classList.toggle("show");
+  error.classList.toggle("bounce");
+  emailInput.classList.toggle("error");
+}
+
+function removeError() {
+  error.classList.toggle("show");
+  error.classList.toggle("bounce");
+  emailInput.classList.toggle("error");
+}
 
 document.addEventListener("click", (e) => {
-  e.preventDefault();
   const target = e.target;
-  console.log(target);
-  if (target.id === "submit") {
-    body.classList.toggle("modal-open");
-    dialog.showModal();
-  }
 
   if (target.id === "dismiss") {
-    body.classList.toggle("modal-open");
-    dialog.close();
+    closeDialog();
+  }
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData);
+
+  for (let name in data) {
+    let status;
+
+    if (name === "email") {
+      status = validateEmail(data[name]);
+    }
+
+    if (!status.validated) {
+      return showError(status.error);
+    }
+    if (emailInput.classList.contains("error")) {
+      removeError();
+    }
+    return showSuccess(data[name]);
   }
 });
