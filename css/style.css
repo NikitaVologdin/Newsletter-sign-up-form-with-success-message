@@ -90,6 +90,7 @@ body main {
   max-width: 375px;
   background-color: hsl(0, 0%, 100%);
   padding-bottom: 40px;
+  z-index: 1;
 }
 .subscribe .subscribe__article, .subscribe .subscribe__form {
   margin-top: 40px;
@@ -189,6 +190,7 @@ body main {
   border: 0px;
   opacity: 0;
   transition: opacity 0.3s ease-in;
+  z-index: 0;
 }
 .modal__image {
   margin-top: 149px;
