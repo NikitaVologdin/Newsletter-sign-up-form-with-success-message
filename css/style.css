@@ -325,6 +325,7 @@ footer .attribution a {
   }
   .modal {
     height: auto;
+    min-height: 420px;
     width: auto;
     max-width: 504px;
     max-height: 520px;

@@ -17,7 +17,7 @@ function showSuccess(data) {
 function closeDialog() {
   body.classList.toggle("modal-open");
   dialog.classList.toggle("show");
-
+  clearInput();
   const timeOutId = setTimeout(() => {
     dialog.close();
   }, 300);
@@ -31,15 +31,19 @@ function validateEmail(email) {
 
 function showError(message) {
   error.innerText = message;
-  error.classList.toggle("show");
-  error.classList.toggle("bounce");
-  emailInput.classList.toggle("error");
+  error.classList.add("show");
+  error.classList.add("bounce");
+  emailInput.classList.add("error");
 }
 
 function removeError() {
-  error.classList.toggle("show");
-  error.classList.toggle("bounce");
-  emailInput.classList.toggle("error");
+  error.classList.remove("show");
+  error.classList.remove("bounce");
+  emailInput.classList.remove("error");
+}
+
+function clearInput() {
+  emailInput.value = "";
 }
 
 document.addEventListener("click", (e) => {
